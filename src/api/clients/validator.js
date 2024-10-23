@@ -16,7 +16,6 @@ const validClient = [
             return res.status(400).json({ errores: errores.array() });
         }
         
-        // Limpiar los parámetros validados
         req.body = {
             firstname: req.body.firstname,
             lastname: req.body.lastname,
@@ -25,7 +24,7 @@ const validClient = [
             linkedin: req.body.linkedin === undefined ? '' : req.body.linkedin
         };
 
-        next(); // Pasar al siguiente middleware o ruta
+        next(); 
     }
 ];
 
