@@ -1,0 +1,34 @@
+custom:
+  secrets: ${file(.secrets.json)}
+ 
+# "org" ensures this Service is used with the correct Serverless Framework Access Key.
+org: davidcamab
+# "app" enables Serverless Framework Dashboard features and sharing them with other Services.
+app: demo
+# "service" is the name of this project. This will also be added to your AWS resource names.
+
+service: test-softtek
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  timeout: 30
+  region: ${self:custom.secrets.AWS_REGION}
+ 
+  environment:
+    REGION: ${self:provider.region}
+    MYSQL_USER: ${self:custom.secrets.MYSQL_USER}
+    MYSQL_PASSWORD: ${self:custom.secrets.MYSQL_PASSWORD}
+    MYSQL_URI: ${self:custom.secrets.MYSQL_URI}
+    MYSQL_DATABASE: ${self:custom.secrets.MYSQL_DATABASE}
+    DATABASE_TYPE: ${self:custom.secrets.DATABASE_TYPE}
+    STAGE: ${self:custom.secrets.NODE_ENV}
+
+functions:
+  api:
+    handler: src/index.handler
+    events:
+      - httpApi: "*"
+
+plugins:
+  - serverless-offline

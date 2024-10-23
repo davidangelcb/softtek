@@ -1,0 +1,25 @@
+{
+  "name": "test-softtek",
+  "version": "1.0.0",
+  "description": "",
+  "dependencies": {
+    "axios": "^1.7.7",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "express-validator": "^7.2.0",
+    "mysql2": "^3.11.3",
+    "sequelize": "^6.37.4",
+    "serverless-http": "^3.2.0"
+  },
+  "scripts": {
+    "test": "jest",
+    "dev": "nodemon --exec serverless offline"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "nodemon": "^3.1.7",
+    "serverless-offline": "^14.3.3",
+    "supertest": "^7.0.0"
+  }
+}
