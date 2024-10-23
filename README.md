@@ -63,18 +63,65 @@ Which should result in the following response:
 
 ### Local development
 
-The easiest way to develop and test your function is to use the `dev` command:
+1.- Update Files configuration
+
+
+``` 
+copy **secrets.example.json** as **.secrets.json** and update with the keys
+
+Note: for Unit test you need instance of MySql for test:
+copy **env.example** as **.env** and update with the keys
+```
+
+
+2.- run dependencies
+
+``` 
+npm install
+```
+
+
+3.- run next comand:
 
 ```
-serverless dev
+serverless offline
+
+```
+ 
+or  command to Hot reload code updates
+
+```
+serverless offline start --reloadHandler
 ```
 
-This will start a local emulator of AWS Lambda and tunnel your requests to and from AWS Lambda, allowing you to interact with your function as if it were running in the cloud.
+ After running, you should see output similar to:
 
-Now you can invoke the function as before, but this time the function will be executed locally. Now you can develop your function locally, invoke it, and see the results immediately without having to re-deploy.
+```
+    ───────────────────────────────────────────────────────────────────────┐
+   │                                                                       │
+   │   ANY  | http://localhost:3000/{default*}                             │
+   │   POST | http://localhost:3000/2015-03-31/functions/api/invocations   │
+   │                                                                       │
+   └───────────────────────────────────────────────────────────────────────┘
 
-When you are done developing, don't forget to run `serverless deploy` to deploy the function to the cloud.
+Server ready: http://localhost:3000 
+```
+
+## Rutas
+
+| Método | Ruta              | Descripción                | Ejemplo de Solicitud                                   |
+|--------|-------------------|----------------------------|--------------------------------------------------------|
+| GET    | `/api/clients`    | All clients                | `curl -X GET http://localhost:3000/api/clients`        |
+| POST   | `/api/clients`    | Create new client          | `curl -X POST http://localhost:3000/api/clients -H "Content-Type: application/json" -d '{"firstname": "O..","lastname": "Fer..","dni": 32343456,"age": 29,"linkedin": "linkedin.com"}'` |
+| GET    | `/api/clients/:id`| Client by ID               | `curl -X GET http://localhost:3000/api/clients/1`      |
+| GET    | `/api/films/:id`  | Films by ID                | `curl -X GET http://localhost:3000/api/films/1`        |
+| GET    | `/api/people/:id` | people by ID               | `curl -X GET http://localhost:3000/api/people/1`       |
+| GET    | `/api/planets/:id`| planets by ID              | `curl -X GET http://localhost:3000/api/planets/1`      | 
+| GET    | `/api/species/:id`| species by ID              | `curl -X GET http://localhost:3000/api/species/1`      |
+| GET    |`/api/starships/:id`| starships by ID           | `curl -X GET http://localhost:3000/api/starships/3`    |
+| GET    |`/api/vehicles/:id`| vehicles by ID             | `curl -X GET http://localhost:3000/api/vehicles/4`     |
 
 
-/* For local run */
--> serverless offline
+
+
+
